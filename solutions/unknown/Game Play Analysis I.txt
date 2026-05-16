@@ -1,0 +1,14 @@
+// Title: Game Play Analysis I
+            // Difficulty: Unknown
+            // Language: MySQL
+            // Link: https://leetcode.com/problems/game-play-analysis-i/
+
+# Write your MySQL query statement below
+with ranked as (
+    select player_id,device_id, event_date, games_played,
+    Rank() over(partition by player_id order by event_date) 
+as ranks
+    from activity
+)
+select player_id, event_date as first_login
+from ranked
